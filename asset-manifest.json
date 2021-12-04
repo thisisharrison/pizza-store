@@ -1,29 +1,29 @@
 {
   "files": {
     "main.css": "/pizza-store/static/css/main.677887fb.chunk.css",
-    "main.js": "/pizza-store/static/js/main.c0515921.chunk.js",
-    "main.js.map": "/pizza-store/static/js/main.c0515921.chunk.js.map",
-    "runtime-main.js": "/pizza-store/static/js/runtime-main.61dfcfac.js",
-    "runtime-main.js.map": "/pizza-store/static/js/runtime-main.61dfcfac.js.map",
+    "main.js": "/pizza-store/static/js/main.16572c93.chunk.js",
+    "main.js.map": "/pizza-store/static/js/main.16572c93.chunk.js.map",
+    "runtime-main.js": "/pizza-store/static/js/runtime-main.b53fac6f.js",
+    "runtime-main.js.map": "/pizza-store/static/js/runtime-main.b53fac6f.js.map",
     "static/css/2.70d6131b.chunk.css": "/pizza-store/static/css/2.70d6131b.chunk.css",
-    "static/js/2.fa8e9111.chunk.js": "/pizza-store/static/js/2.fa8e9111.chunk.js",
-    "static/js/2.fa8e9111.chunk.js.map": "/pizza-store/static/js/2.fa8e9111.chunk.js.map",
-    "static/js/3.7971d838.chunk.js": "/pizza-store/static/js/3.7971d838.chunk.js",
-    "static/js/3.7971d838.chunk.js.map": "/pizza-store/static/js/3.7971d838.chunk.js.map",
-    "static/js/4.d839aa84.chunk.js": "/pizza-store/static/js/4.d839aa84.chunk.js",
-    "static/js/4.d839aa84.chunk.js.map": "/pizza-store/static/js/4.d839aa84.chunk.js.map",
+    "static/js/2.2e4707b3.chunk.js": "/pizza-store/static/js/2.2e4707b3.chunk.js",
+    "static/js/2.2e4707b3.chunk.js.map": "/pizza-store/static/js/2.2e4707b3.chunk.js.map",
+    "static/js/3.08cc129d.chunk.js": "/pizza-store/static/js/3.08cc129d.chunk.js",
+    "static/js/3.08cc129d.chunk.js.map": "/pizza-store/static/js/3.08cc129d.chunk.js.map",
+    "static/js/4.8b7def21.chunk.js": "/pizza-store/static/js/4.8b7def21.chunk.js",
+    "static/js/4.8b7def21.chunk.js.map": "/pizza-store/static/js/4.8b7def21.chunk.js.map",
     "index.html": "/pizza-store/index.html",
     "static/css/2.70d6131b.chunk.css.map": "/pizza-store/static/css/2.70d6131b.chunk.css.map",
     "static/css/main.677887fb.chunk.css.map": "/pizza-store/static/css/main.677887fb.chunk.css.map",
-    "static/js/2.fa8e9111.chunk.js.LICENSE.txt": "/pizza-store/static/js/2.fa8e9111.chunk.js.LICENSE.txt",
+    "static/js/2.2e4707b3.chunk.js.LICENSE.txt": "/pizza-store/static/js/2.2e4707b3.chunk.js.LICENSE.txt",
     "static/media/pizza.98ab3b9b.jpg": "/pizza-store/static/media/pizza.98ab3b9b.jpg",
     "static/media/index.scss": "/pizza-store/static/media/roboto-vietnamese-700-normal.3096f18a.woff2"
   },
   "entrypoints": [
-    "static/js/runtime-main.61dfcfac.js",
+    "static/js/runtime-main.b53fac6f.js",
     "static/css/2.70d6131b.chunk.css",
-    "static/js/2.fa8e9111.chunk.js",
+    "static/js/2.2e4707b3.chunk.js",
     "static/css/main.677887fb.chunk.css",
-    "static/js/main.c0515921.chunk.js"
+    "static/js/main.16572c93.chunk.js"
   ]
 }
