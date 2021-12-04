@@ -16,7 +16,8 @@ export interface CustomizeDialogProps {
 }
 
 function CustomizeDialog(props: CustomizeDialogProps) {
-    const { onClose, selectedValue, open } = props;
+    // const { onClose, selectedValue, open } = props;
+    const { open } = props;
 
     const handleClose = () => {
         // TODO
