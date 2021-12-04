@@ -24,6 +24,13 @@ export const Basket = React.memo(() => {
         dispatch({ type: "clear" });
     }, [dispatch]);
 
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        // submit to api service
+        console.log("submit to API: ", orders);
+        dispatch({ type: "submit" });
+    };
+
     const orderActive = orderTotal > 0;
 
     return (
@@ -39,7 +46,8 @@ export const Basket = React.memo(() => {
             data-testid="basket"
         >
             <Box
-                component="div"
+                component="form"
+                onSubmit={handleSubmit}
                 sx={{
                     bgcolor: "#f3f2f2",
                     borderRadius: 1,
@@ -76,7 +84,7 @@ export const Basket = React.memo(() => {
                     </Typography>
                 </Box>
 
-                <Button variant="contained" fullWidth disabled={!orderActive} sx={{ my: 4 }}>
+                <Button type="submit" variant="contained" fullWidth disabled={!orderActive} sx={{ my: 4 }}>
                     Checkout
                 </Button>
             </Box>

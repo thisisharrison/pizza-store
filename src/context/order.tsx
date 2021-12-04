@@ -6,7 +6,8 @@ type ActionType =
     | { type: "update"; payload: Order }
     | { type: "delete"; payload: number }
     | { type: "edit"; payload: null | Partial<Order> }
-    | { type: "clear" };
+    | { type: "clear" }
+    | { type: "submit" };
 
 function reducer(state: OrderState, action: ActionType) {
     let newOrders = Object.assign({}, state.orders);
@@ -47,6 +48,7 @@ function reducer(state: OrderState, action: ActionType) {
                 editing: action.payload,
             };
         case "clear":
+        case "submit":
             return {
                 ...state,
                 orders: null,
