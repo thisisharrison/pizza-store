@@ -116,4 +116,17 @@ describe("PizzaStore", () => {
         expect(checkout).toBeDisabled();
         expect(empty).toBeDisabled();
     });
+
+    test("should be able to empty basket", async () => {
+        const { checkout, empty } = await setUpOrder();
+
+        const orderTotal = screen.getByRole(/order-total/i);
+        expect(orderTotal.textContent).toBe("Total$ 99");
+
+        await userEvent.click(empty);
+
+        expect(orderTotal.textContent).toBe("Total$ 0");
+        expect(checkout).toBeDisabled();
+        expect(empty).toBeDisabled();
+    });
 });
