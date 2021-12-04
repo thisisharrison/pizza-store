@@ -36,6 +36,7 @@ export const Basket = () => {
                 flexDirection: "column",
                 justifyContent: "center",
             }}
+            data-testid="basket"
         >
             <Box
                 sx={{
@@ -54,7 +55,7 @@ export const Basket = () => {
 
                 <Divider variant="middle" sx={{ my: 3 }} />
 
-                <Box display="flex" flexWrap="wrap" justifyContent="flex-end">
+                <Box display="flex" flexWrap="wrap" justifyContent="flex-end" role="order-total">
                     <Typography variant="body1" sx={{ fontWeight: 700 }}>
                         Total
                     </Typography>

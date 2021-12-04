@@ -29,7 +29,7 @@ export const MenuItem = ({ item }: { item: MenuItemI }) => {
                     mx: 1,
                 }}
             >
-                <Button variant="contained" fullWidth onClick={handleClick}>
+                <Button variant="contained" fullWidth onClick={handleClick} role="dialog-button">
                     Choose
                 </Button>
             </CardActions>

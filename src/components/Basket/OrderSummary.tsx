@@ -23,8 +23,8 @@ export const OrderSummary = ({ orders }: { orders: Order[] }) => {
 const OrderItem = React.memo(({ order, onRemove }: { order: Order; onRemove: (id: number) => void }) => (
     <ListItem disablePadding>
         <ListItemIcon>
-            <IconButton onClick={() => onRemove(order.id)}>
-                <CancelIcon color="primary" aria-label="delete" />
+            <IconButton onClick={() => onRemove(order.id)} role="remove">
+                <CancelIcon color="primary" aria-label="remove" />
             </IconButton>
         </ListItemIcon>
         <ListItemText sx={{ width: 0.8 }} primary={`${order.quantity} x ${order.name}`} secondary={`${order.size}, ${order.toppings}`} />

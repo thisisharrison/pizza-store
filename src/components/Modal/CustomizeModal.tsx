@@ -58,7 +58,7 @@ function CustomizeDialog({ open, onClose }: CustomizeDialogProps) {
     };
 
     return (
-        <Dialog onClose={handleClose} open={open} maxWidth="lg">
+        <Dialog onClose={handleClose} open={open} maxWidth="lg" role="dialog">
             <Box component="form" onSubmit={handleSubmit}>
                 <DialogContent>
                     <Box>
