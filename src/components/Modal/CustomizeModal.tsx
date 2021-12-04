@@ -27,6 +27,8 @@ function CustomizeDialog({ open, onClose }: CustomizeDialogProps) {
         size: "Pizza Size #1",
     });
 
+    const { enqueueSnackbar } = useSnackbar();
+
     const handleClose = () => {
         onClose(null);
     };
@@ -36,7 +38,7 @@ function CustomizeDialog({ open, onClose }: CustomizeDialogProps) {
         if (order.toppings.length > 0) {
             onClose(order);
         } else {
-            console.log(`error`, "error");
+            enqueueSnackbar("Must choose at least one topping", { variant: "error" });
         }
     };
 
