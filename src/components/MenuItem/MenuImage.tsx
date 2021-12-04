@@ -8,9 +8,9 @@ import type { Theme } from "@mui/material";
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
     position: "relative",
     height: 140,
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
         width: "100% !important", // Overrides inline-style
-        height: 200,
+        height: 300,
     },
     "&:hover, &.Mui-focusVisible": {
         zIndex: 1,

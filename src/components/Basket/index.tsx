@@ -31,7 +31,7 @@ export const Basket = () => {
             sx={{
                 p: 1,
                 m: 1,
-                width: [1, 1, 0.4],
+                width: [1, 1, 0.3],
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
@@ -42,16 +42,26 @@ export const Basket = () => {
                 sx={{
                     bgcolor: "#f3f2f2",
                     borderRadius: 1,
-                    p: 4,
+                    height: "70vh",
+                    p: 2,
                 }}
             >
-                {orderTotal ? (
-                    <OrderSummary orders={orderItems} />
-                ) : (
-                    <Typography variant="body1" align="center">
-                        No items in your basket
-                    </Typography>
-                )}
+                <Box
+                    sx={{
+                        height: "75%",
+                        textOverflow: "clip",
+                        overflow: "hidden",
+                        overflowY: "scroll",
+                    }}
+                >
+                    {orderTotal ? (
+                        <OrderSummary orders={orderItems} />
+                    ) : (
+                        <Typography variant="body1" align="center">
+                            No items in your basket
+                        </Typography>
+                    )}
+                </Box>
 
                 <Divider variant="middle" sx={{ my: 3 }} />
 

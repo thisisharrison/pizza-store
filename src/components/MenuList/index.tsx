@@ -9,15 +9,15 @@ const dummyMenu: MenuItemI[] = Array.from({ length: 6 }).map((_, i) => ({
     price: 99,
 }));
 
-console.log(`dummyMenu`, dummyMenu);
 export const MenuList = () => {
     return (
         <Box
             sx={{
                 flexGrow: 1,
+                width: [1, 1, 0.7],
                 display: "flex",
                 flexWrap: "wrap",
-                m: 1,
+                my: 1,
             }}
         >
             {dummyMenu.map((_) => (

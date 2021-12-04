@@ -10,12 +10,12 @@ export default function Home() {
 
     return (
         <>
+            {/* {JSON.stringify(state, undefined, 2)} */}
             <Box sx={{ display: "flex", flexDirection: ["column", "column", "row"], alignItems: "flex-start", minHeight: "100vh" }}>
                 <MenuList />
                 <Basket />
             </Box>
             <CustomizeModal key={JSON.stringify(state.editing)} />
-            {JSON.stringify(state, undefined, 2)}
         </>
     );
 }

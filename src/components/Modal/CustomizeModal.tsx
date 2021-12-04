@@ -68,7 +68,7 @@ function CustomizeDialog({ open, onClose }: CustomizeDialogProps) {
                                     {toppings.map((topping) => {
                                         const checked = order.toppings.indexOf(topping) !== -1;
                                         return (
-                                            <ListItem disablePadding key={topping}>
+                                            <ListItem disablePadding key={topping} sx={{ breakInside: "avoid" }}>
                                                 <FormControlLabel control={<Checkbox checked={checked} onChange={updateToppings} name={topping} />} label={topping} />
                                             </ListItem>
                                         );
