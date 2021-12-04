@@ -1,13 +1,12 @@
 import React from "react";
 import { Basket } from "../../components/Basket";
 import { MenuList } from "../../components/MenuList";
-// import { useAppContext } from "../../context";
-import { Box } from "@mui/system";
 import { CustomizeModal } from "../../components/Modal/CustomizeModal";
+import { useOrderContext } from "../../context/order";
+import { Box } from "@mui/system";
 
 export default function Home() {
-    // React
-    // const [state] = useAppContext();
+    const [state] = useOrderContext();
 
     return (
         <>
@@ -15,7 +14,8 @@ export default function Home() {
                 <MenuList />
                 <Basket />
             </Box>
-            <CustomizeModal />
+            <CustomizeModal key={JSON.stringify(state.editing)} />
+            {JSON.stringify(state, undefined, 2)}
         </>
     );
 }

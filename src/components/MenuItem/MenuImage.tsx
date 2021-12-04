@@ -1,14 +1,14 @@
-import { ButtonBase } from "@mui/material";
-import { Box, styled } from "@mui/system";
 import React from "react";
 import Pizza from "../../assets/pizza.jpg";
+import { ButtonBase } from "@mui/material";
+import { Box, styled } from "@mui/system";
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
     position: "relative",
     height: 140,
     [theme.breakpoints.down("sm")]: {
         width: "100% !important", // Overrides inline-style
-        height: 100,
+        height: 200,
     },
     "&:hover, &.Mui-focusVisible": {
         zIndex: 1,
@@ -51,10 +51,14 @@ const ImageBackdrop = styled("span")(({ theme }) => ({
     },
 }));
 
-export const MenuImage = React.memo(() => {
+interface MenuImageProps {
+    onClick: () => void;
+}
+
+export const MenuImage = React.memo(({ onClick }: MenuImageProps) => {
     return (
         <Box sx={{ display: "flex", flexWrap: "wrap", width: "100%" }}>
-            <ImageButton focusRipple style={{ width: "100%" }}>
+            <ImageButton focusRipple style={{ width: "100%" }} onClick={onClick}>
                 <ImageSrc
                     style={{
                         backgroundImage: `url(${Pizza})`,
