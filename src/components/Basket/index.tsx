@@ -39,25 +39,27 @@ export const Basket = () => {
             data-testid="basket"
         >
             <Box
+                component="div"
                 sx={{
                     bgcolor: "#f3f2f2",
                     borderRadius: 1,
-                    height: "70vh",
+                    overflow: "hidden",
                     p: 2,
                 }}
             >
                 <Box
+                    component="div"
                     sx={{
+                        maxHeight: "65vh",
                         height: "75%",
-                        textOverflow: "clip",
-                        overflow: "hidden",
+                        overflow: "auto",
                         overflowY: "scroll",
                     }}
                 >
                     {orderTotal ? (
                         <OrderSummary orders={orderItems} />
                     ) : (
-                        <Typography variant="body1" align="center">
+                        <Typography variant="body1" align="center" sx={{ mt: 4 }}>
                             No items in your basket
                         </Typography>
                     )}
