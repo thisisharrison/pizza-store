@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "../setupTests";
-import { screen, waitFor, within } from "@testing-library/react";
+import { screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Home from "../module/Home";
 
