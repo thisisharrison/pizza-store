@@ -5,7 +5,7 @@ import { ObjectUtil } from "../../utils/ObjectUtil";
 import { Box } from "@mui/system";
 import { Button, Divider, Link, Typography } from "@mui/material";
 
-export const Basket = () => {
+export const Basket = React.memo(() => {
     const [state, dispatch] = useOrderContext();
 
     const { orders } = state;
@@ -102,4 +102,4 @@ export const Basket = () => {
             </Link>
         </Box>
     );
-};
+});

@@ -27,12 +27,10 @@ function CustomizeDialog({ open, onClose }: CustomizeDialogProps) {
     });
 
     const handleClose = () => {
-        // validation before calling onClose
         onClose(null);
     };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        // validation before calling onClose
         event.preventDefault();
         if (order.toppings.length > 0) {
             onClose(order);
@@ -109,7 +107,6 @@ export function CustomizeModal() {
 
     const { editing } = state;
 
-    // id is set in reducer, name is set in editing, quantity, set in this function, size and topping from order
     const handleClose = (order: OrderState | null) => {
         if (order) {
             // @ts-ignore -- will always call handleClose with editing not null
@@ -119,9 +116,5 @@ export function CustomizeModal() {
         }
     };
 
-    return (
-        <div>
-            <CustomizeDialog open={!!editing} onClose={handleClose} />
-        </div>
-    );
+    return <CustomizeDialog open={!!editing} onClose={handleClose} />;
 }

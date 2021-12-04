@@ -15,7 +15,7 @@ export default function Home() {
                 <MenuList />
                 <Basket />
             </Box>
-            <CustomizeModal key={JSON.stringify(state.editing)} />
+            <CustomizeModal key={state.editing ? state.editing.id : "none"} />
         </>
     );
 }

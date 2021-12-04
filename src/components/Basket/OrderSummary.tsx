@@ -4,7 +4,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { IconButton, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import type { Order } from "../../shared/types";
 
-export const OrderSummary = ({ orders }: { orders: Order[] }) => {
+export const OrderSummary = React.memo(({ orders }: { orders: Order[] }) => {
     const [, dispatch] = useOrderContext();
 
     const removeItem = (id: number) => {
@@ -18,7 +18,7 @@ export const OrderSummary = ({ orders }: { orders: Order[] }) => {
             ))}
         </List>
     );
-};
+});
 
 const OrderItem = React.memo(({ order, onRemove }: { order: Order; onRemove: (id: number) => void }) => (
     <ListItem disablePadding>

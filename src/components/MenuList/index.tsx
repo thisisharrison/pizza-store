@@ -9,7 +9,7 @@ const dummyMenu: MenuItemI[] = Array.from({ length: 6 }).map((_, i) => ({
     price: 99,
 }));
 
-export const MenuList = () => {
+export const MenuList = React.memo(() => {
     return (
         <Box
             sx={{
@@ -25,4 +25,4 @@ export const MenuList = () => {
             ))}
         </Box>
     );
-};
+});
