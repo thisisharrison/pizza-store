@@ -1,0 +1,9 @@
+# Artifacts
+**/build/**
+# **/public/**
+
+# Dependencies
+**/node_modules/**
+
+# Coverage Reports
+**/coverage/**

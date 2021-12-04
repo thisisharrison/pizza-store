@@ -1,0 +1,8 @@
+# Artifacts
+**/build/**
+
+# Dependencies
+**/node_modules/**
+
+**/*.ts
+**/*.tsx
