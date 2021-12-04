@@ -1,32 +1,33 @@
 import React from "react";
-import { IconButton, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { useOrderContext } from "../../context/order";
 import CancelIcon from "@mui/icons-material/Cancel";
+import { IconButton, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import type { Order } from "../../shared/types";
 
-interface OrderProps {
-    id: number;
-    quantity: number;
-    name: string;
-    size: string;
-    toppings: string[];
-}
+export const OrderSummary = ({ orders }: { orders: Order[] }) => {
+    const [, dispatch] = useOrderContext();
 
-export const OrderSummary = ({ orders }: { orders: OrderProps[] }) => {
+    const removeItem = (id: number) => {
+        dispatch({ type: "delete", payload: id });
+    };
+
     return (
         <List>
             {orders.map((_) => (
-                <OrderItem key={_.id} order={_} />
+                <OrderItem key={_.id} order={_} onRemove={removeItem} />
             ))}
         </List>
     );
 };
 
-const OrderItem = React.memo(({ order }: { order: OrderProps }) => (
+const OrderItem = React.memo(({ order, onRemove }: { order: Order; onRemove: (id: number) => void }) => (
     <ListItem disablePadding>
         <ListItemIcon>
-            <IconButton>
-                <CancelIcon color="primary" aria-label="delete" />
+            <IconButton onClick={() => onRemove(order.id)} role="remove">
+                <CancelIcon color="primary" aria-label="remove" />
             </IconButton>
         </ListItemIcon>
-        <ListItemText primary={`${order.quantity} x ${order.name}`} secondary={`${order.size}, ${order.toppings}`} />
+        <ListItemText sx={{ width: 0.8 }} primary={`${order.quantity} x ${order.name}`} secondary={`${order.size}, ${order.toppings}`} />
+        <ListItemText sx={{ textAlign: "right", width: 0.2 }} primary={`${`$` + order.price}`} />
     </ListItem>
 ));

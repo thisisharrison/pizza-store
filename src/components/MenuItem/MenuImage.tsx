@@ -1,14 +1,16 @@
-import { ButtonBase } from "@mui/material";
-import { Box, styled } from "@mui/system";
 import React from "react";
 import Pizza from "../../assets/pizza.jpg";
+import { styled } from "@mui/material/styles";
+import { ButtonBase } from "@mui/material";
+import { Box } from "@mui/system";
+import type { Theme } from "@mui/material";
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
     position: "relative",
     height: 140,
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
         width: "100% !important", // Overrides inline-style
-        height: 100,
+        height: 300,
     },
     "&:hover, &.Mui-focusVisible": {
         zIndex: 1,
@@ -35,7 +37,7 @@ const ImageSrc = styled("span")({
     borderRadius: 8,
 });
 
-const ImageBackdrop = styled("span")(({ theme }) => ({
+const ImageBackdrop = styled("span")(({ theme }: { theme: Theme }) => ({
     position: "absolute",
     left: 0,
     right: 0,
@@ -44,17 +46,20 @@ const ImageBackdrop = styled("span")(({ theme }) => ({
     borderRadius: 8,
     backgroundColor: theme.palette.common.black,
     opacity: 0.2,
-    // @ts-ignore
     transition: theme.transitions.create("opacity"),
     ":hover": {
         opacity: 0,
     },
 }));
 
-export const MenuImage = React.memo(() => {
+interface MenuImageProps {
+    onClick: () => void;
+}
+
+export const MenuImage = React.memo(({ onClick }: MenuImageProps) => {
     return (
         <Box sx={{ display: "flex", flexWrap: "wrap", width: "100%" }}>
-            <ImageButton focusRipple style={{ width: "100%" }}>
+            <ImageButton focusRipple style={{ width: "100%" }} onClick={onClick} role="dialog-image">
                 <ImageSrc
                     style={{
                         backgroundImage: `url(${Pizza})`,

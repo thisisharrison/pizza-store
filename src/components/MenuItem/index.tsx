@@ -1,14 +1,24 @@
 import React from "react";
 import { MenuImage } from "./MenuImage";
+import { useOrderContext } from "../../context/order";
+import type { MenuItemI } from "../../shared/types";
 import { Button, Card, CardActions, CardContent, Typography } from "@mui/material";
 
-export const MenuItem = () => {
+export const MenuItem = ({ item }: { item: MenuItemI }) => {
+    const [, dispatch] = useOrderContext();
+
+    const { name, price } = item;
+
+    const handleClick = () => {
+        dispatch({ type: "edit", payload: { name, price } });
+    };
+
     return (
         <Card variant="outlined" sx={{ width: [1, 1, 0.3], m: 1, borderColor: "#e9e9e9", textAlign: "center", borderRadius: 4 }}>
             <CardContent>
-                <MenuImage />
+                <MenuImage onClick={handleClick} />
                 <Typography variant="body1" color="text.secondary" sx={{ mt: 2 }}>
-                    Pizza Name - $99
+                    {name} - {`$` + price}
                 </Typography>
             </CardContent>
             <CardActions
@@ -19,7 +29,7 @@ export const MenuItem = () => {
                     mx: 1,
                 }}
             >
-                <Button variant="contained" fullWidth>
+                <Button variant="contained" fullWidth onClick={handleClick} role="dialog-button">
                     Choose
                 </Button>
             </CardActions>

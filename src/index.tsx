@@ -1,18 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { AppProvider } from "./context";
+import { OrderProvider } from "./context/order";
 import App from "./module";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import "./index.scss";
 
 document.addEventListener("DOMContentLoaded", () => {
     ReactDOM.render(
         <React.StrictMode>
-            <BrowserRouter>
-                <AppProvider>
+            <HashRouter>
+                <OrderProvider>
                     <App />
-                </AppProvider>
-            </BrowserRouter>
+                </OrderProvider>
+            </HashRouter>
         </React.StrictMode>,
         document.getElementById("root")
     );
