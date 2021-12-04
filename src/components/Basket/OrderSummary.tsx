@@ -1,14 +1,17 @@
 import React from "react";
 import { useOrderContext } from "../../context/order";
+import { useSnackbar } from "notistack";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { IconButton, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import type { Order } from "../../shared/types";
 
 export const OrderSummary = React.memo(({ orders }: { orders: Order[] }) => {
     const [, dispatch] = useOrderContext();
+    const { enqueueSnackbar } = useSnackbar();
 
     const removeItem = (id: number) => {
         dispatch({ type: "delete", payload: id });
+        enqueueSnackbar("Item is removed", { variant: "info" });
     };
 
     return (

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useOrderContext } from "../../context/order";
+import { useSnackbar } from "notistack";
 import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -102,19 +103,22 @@ function CustomizeDialog({ open, onClose }: CustomizeDialogProps) {
     );
 }
 
-export function CustomizeModal() {
+export function CustomizeModal({ open, onClose }: { open: boolean; onClose: () => void }) {
     const [state, dispatch] = useOrderContext();
+    const { enqueueSnackbar } = useSnackbar();
 
     const { editing } = state;
 
     const handleClose = (order: OrderState | null) => {
         if (order) {
             // @ts-ignore -- will always call handleClose with editing not null
-            dispatch({ type: "create", payload: { quantity: 1, ...editing, ...order } });
+            dispatch({ type: "create", payload: { quantity: 1, ...editing, ...order }, toast: "create" });
+            enqueueSnackbar("Added an item to Basket", { variant: "success" });
         } else {
             dispatch({ type: "edit", payload: null });
         }
+        onClose();
     };
 
-    return <CustomizeDialog open={!!editing} onClose={handleClose} />;
+    return <CustomizeDialog key={editing ? editing.id : "none"} open={open} onClose={handleClose} />;
 }

@@ -1,12 +1,14 @@
 import React from "react";
 import { OrderSummary } from "./OrderSummary";
 import { useOrderContext } from "../../context/order";
+import { useSnackbar } from "notistack";
 import { ObjectUtil } from "../../utils/ObjectUtil";
 import { Box } from "@mui/system";
 import { Button, Divider, Link, Typography } from "@mui/material";
 
 export const Basket = React.memo(() => {
     const [state, dispatch] = useOrderContext();
+    const { enqueueSnackbar } = useSnackbar();
 
     const { orders } = state;
 
@@ -20,15 +22,17 @@ export const Basket = React.memo(() => {
         return ObjectUtil.reduceByKey(orders as Record<string, any>, "price");
     }, [orders]);
 
-    const emptyBasket = React.useCallback(() => {
+    const emptyBasket = () => {
         dispatch({ type: "clear" });
-    }, [dispatch]);
+        enqueueSnackbar("Basket cleared!", { variant: "info" });
+    };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         // submit to api service
         console.log("submit to API: ", orders);
         dispatch({ type: "submit" });
+        enqueueSnackbar("Your order is in the kichen!", { variant: "success" });
     };
 
     const orderActive = orderTotal > 0;

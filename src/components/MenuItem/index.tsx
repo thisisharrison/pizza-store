@@ -4,13 +4,14 @@ import { useOrderContext } from "../../context/order";
 import type { MenuItemI } from "../../shared/types";
 import { Button, Card, CardActions, CardContent, Typography } from "@mui/material";
 
-export const MenuItem = React.memo(({ item }: { item: MenuItemI }) => {
+export const MenuItem = React.memo(({ item, onClick }: { item: MenuItemI; onClick: () => void }) => {
     const [, dispatch] = useOrderContext();
 
     const { name, price } = item;
 
     const handleClick = () => {
         dispatch({ type: "edit", payload: { name, price } });
+        onClick();
     };
 
     return (
