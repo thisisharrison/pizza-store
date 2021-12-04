@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useOrderContext } from "../../context/order";
+import { useSnackbar } from "notistack";
 import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -26,18 +27,18 @@ function CustomizeDialog({ open, onClose }: CustomizeDialogProps) {
         size: "Pizza Size #1",
     });
 
+    const { enqueueSnackbar } = useSnackbar();
+
     const handleClose = () => {
-        // validation before calling onClose
         onClose(null);
     };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        // validation before calling onClose
         event.preventDefault();
         if (order.toppings.length > 0) {
             onClose(order);
         } else {
-            console.log(`error`, "error");
+            enqueueSnackbar("Must choose at least one topping", { variant: "error" });
         }
     };
 
@@ -104,24 +105,22 @@ function CustomizeDialog({ open, onClose }: CustomizeDialogProps) {
     );
 }
 
-export function CustomizeModal() {
+export function CustomizeModal({ open, onClose }: { open: boolean; onClose: () => void }) {
     const [state, dispatch] = useOrderContext();
+    const { enqueueSnackbar } = useSnackbar();
 
     const { editing } = state;
 
-    // id is set in reducer, name is set in editing, quantity, set in this function, size and topping from order
     const handleClose = (order: OrderState | null) => {
         if (order) {
             // @ts-ignore -- will always call handleClose with editing not null
-            dispatch({ type: "create", payload: { quantity: 1, ...editing, ...order } });
+            dispatch({ type: "create", payload: { quantity: 1, ...editing, ...order }, toast: "create" });
+            enqueueSnackbar("Added an item to Basket", { variant: "success" });
         } else {
             dispatch({ type: "edit", payload: null });
         }
+        onClose();
     };
 
-    return (
-        <div>
-            <CustomizeDialog open={!!editing} onClose={handleClose} />
-        </div>
-    );
+    return <CustomizeDialog key={editing ? editing.id : "none"} open={open} onClose={handleClose} />;
 }
