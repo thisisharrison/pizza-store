@@ -5,6 +5,20 @@ import { useSnackbar } from "notistack";
 import { ObjectUtil } from "../../utils/ObjectUtil";
 import { Box } from "@mui/system";
 import { Button, Divider, Link, Typography } from "@mui/material";
+import { createOrder } from "../../utils/api";
+
+// @ts-ignore
+window.createOrder = createOrder;
+
+interface Exception {
+    response: {
+        data: {
+            errors: {
+                [k: string]: object;
+            };
+        };
+    };
+}
 
 export const Basket = () => {
     const [state, dispatch] = useOrderContext();
@@ -29,10 +43,20 @@ export const Basket = () => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if (!orders) return;
+        const transaction = Object.values(orders);
         // submit to api service
-        console.log("submit to API: ", orders);
-        dispatch({ type: "submit" });
-        enqueueSnackbar("Your order is in the kichen!", { variant: "success" });
+        createOrder(transaction)
+            .then((res) => {
+                dispatch({ type: "submit" });
+                console.info("submit to API: ", res);
+                enqueueSnackbar("Your order is in the kitchen!", { variant: "success" });
+            })
+            .catch((error: Exception) => {
+                console.error("api error: ", error);
+                const fields = Object.keys(error.response.data.errors).join(", ");
+                enqueueSnackbar(`Your order was not successful! Check ${fields}.`, { variant: "error" });
+            });
     };
 
     const orderActive = orderTotal > 0;

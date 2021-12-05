@@ -63,25 +63,6 @@ type ContextType = [OrderState, React.Dispatch<ActionType>];
 const OrderContext = React.createContext<ContextType | null>(null);
 OrderContext.displayName = "OrderContext";
 
-// Add a lot of orders
-// const x = Array.from({ length: 10 }).map((_, i) => ({
-//     id: i,
-//     name: `Pizza ${i + 1}`,
-//     // @ts-ignore
-//     toppings: Array.from({ length: 20 }).map((i) => `Pizza Topping #${i + 1}`),
-//     price: 99,
-//     quantity: 1,
-//     size: "Pizza Size #1",
-// }));
-
-// const y: {
-//     [key: string]: Order;
-// } = {};
-
-// for (const i of x) {
-//     y[i.id] = i;
-// }
-
 const initialState: OrderState = {
     editing: null,
     count: 0,
