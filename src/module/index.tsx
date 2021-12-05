@@ -24,12 +24,14 @@ function App() {
         },
     });
 
-    /** This is just for not breaking the demo. In production, API endpoint is stable and we don't need to check first */
+    /** This is used for demo only. In real world application, API endpoints are stable and we don't need to check first */
     const [apiAvailable, setApiAvailable] = React.useState(false);
     React.useEffect(() => {
-        testApi().then((res) => {
-            setApiAvailable(true);
-        });
+        testApi()
+            .then((res) => {
+                setApiAvailable(true);
+            })
+            .catch((err) => console.info("Back end server not running. Please start Dev Server or check Production Server. Will mock API calls in Console"));
     }, []);
 
     /** Simple FallbackComponent onReset handler */
