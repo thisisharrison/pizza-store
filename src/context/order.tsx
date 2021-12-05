@@ -3,8 +3,10 @@ import type { OrderState, Order } from "../shared/types";
 
 type ActionType =
     | { type: "create"; payload: Omit<Order, "id"> }
+    /** App does not update orders after they have been added to basket, but this action can handle it */
     | { type: "update"; payload: Order }
     | { type: "delete"; payload: number }
+    /** When user click `Choose`, they're editing an order. If they choose to `Add to Basket`, then order is created, otherwise, it will be `clear` */
     | { type: "edit"; payload: null | Partial<Order> }
     | { type: "clear" }
     | { type: "submit" };
