@@ -2,9 +2,11 @@
 
 ---
 
-## Development
+## Instructions
 
-**Start backend services first:** Clone and start the project here: [pizza-server](https://github.com/thisisharrison/pizza-server)
+**⚠️ For Full-Stack development, start backend service:** Start the backend following its README: [pizza-server](https://github.com/thisisharrison/pizza-server)
+
+**⭐️ You can run the Front-End and start the project <ins>without</ins> a running backend service as well.**
 
 ### 1. Use correct node version
 
