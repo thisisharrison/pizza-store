@@ -6,7 +6,7 @@ import { ObjectUtil } from "../../utils/ObjectUtil";
 import { Box } from "@mui/system";
 import { Button, Divider, Link, Typography } from "@mui/material";
 
-export const Basket = React.memo(() => {
+export const Basket = () => {
     const [state, dispatch] = useOrderContext();
     const { enqueueSnackbar } = useSnackbar();
 
@@ -114,4 +114,4 @@ export const Basket = React.memo(() => {
             </Link>
         </Box>
     );
-});
+};

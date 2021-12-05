@@ -10,7 +10,7 @@ const dummyMenu: MenuItemI[] = Array.from({ length: 6 }).map((_, i) => ({
     price: 99,
 }));
 
-export const MenuList = React.memo(() => {
+export const MenuList = () => {
     const [open, setOpen] = React.useState(false);
 
     return (
@@ -31,4 +31,4 @@ export const MenuList = React.memo(() => {
             <CustomizeModal open={open} onClose={() => setOpen(false)} />
         </>
     );
-});
+};

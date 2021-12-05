@@ -65,7 +65,7 @@ function CustomizeDialog({ open, onClose }: CustomizeDialogProps) {
                     <Box>
                         <FormControl>
                             <FormGroup>
-                                <List sx={{ columnCount: [2, 2, 3] }}>
+                                <List sx={{ columnCount: [1, 2, 3] }}>
                                     {toppings.map((topping) => {
                                         const checked = order.toppings.indexOf(topping) !== -1;
                                         return (
