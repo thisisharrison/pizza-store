@@ -1,12 +1,13 @@
 import React from "react";
 import { OrderSummary } from "./OrderSummary";
 import { useOrderContext } from "../../context/order";
-import { useSnackbar } from "notistack";
+import { createOrder } from "../../utils/api";
 import { ObjectUtil } from "../../utils/ObjectUtil";
+import { useSnackbar } from "notistack";
 import { Box } from "@mui/system";
 import { Button, Divider, Link, Typography } from "@mui/material";
 
-export const Basket = React.memo(() => {
+export const Basket = () => {
     const [state, dispatch] = useOrderContext();
     const { enqueueSnackbar } = useSnackbar();
 
@@ -29,10 +30,27 @@ export const Basket = React.memo(() => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if (!orders) return;
+        const transaction = Object.values(orders);
         // submit to api service
-        console.log("submit to API: ", orders);
-        dispatch({ type: "submit" });
-        enqueueSnackbar("Your order is in the kichen!", { variant: "success" });
+        createOrder(transaction)
+            .then((res) => {
+                dispatch({ type: "submit" });
+                console.info("submit to API: ", res);
+                enqueueSnackbar("Your order is in the kitchen!", { variant: "success" });
+            })
+            .catch((error) => {
+                if (error.response.status === 400) {
+                    const {
+                        response: {
+                            data: { name, errors },
+                        },
+                    } = error;
+                    console.error("api error: ", name);
+                    const fields = Object.keys(errors).join(", ");
+                    enqueueSnackbar(`Your order was not successful! Check ${fields}.`, { variant: "error" });
+                }
+            });
     };
 
     const orderActive = orderTotal > 0;
@@ -114,4 +132,4 @@ export const Basket = React.memo(() => {
             </Link>
         </Box>
     );
-});
+};

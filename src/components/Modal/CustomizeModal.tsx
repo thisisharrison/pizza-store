@@ -33,6 +33,7 @@ function CustomizeDialog({ open, onClose }: CustomizeDialogProps) {
         onClose(null);
     };
 
+    /** Validates toppings before submit. To see API error messages, comment out below lines leaving only `onClose(order)` */
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (order.toppings.length > 0) {
@@ -65,7 +66,7 @@ function CustomizeDialog({ open, onClose }: CustomizeDialogProps) {
                     <Box>
                         <FormControl>
                             <FormGroup>
-                                <List sx={{ columnCount: [2, 2, 3] }}>
+                                <List sx={{ columnCount: [1, 2, 3] }}>
                                     {toppings.map((topping) => {
                                         const checked = order.toppings.indexOf(topping) !== -1;
                                         return (
