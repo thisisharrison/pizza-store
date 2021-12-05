@@ -5,7 +5,9 @@ import userEvent from "@testing-library/user-event";
 import Home from "../module/Home";
 
 function setUpHome() {
-    render(<Home />);
+    /** In real world application, we would mock APIs as well to test response messages */
+    /** For now, api is `false` for demo purposes */
+    render(<Home api={false} />);
     const chooseButtons = screen.getAllByRole(/dialog-button/i);
     const imageButton = screen.getAllByRole(/dialog-image/i);
     const checkout = screen.getByRole("button", { name: /checkout/i });

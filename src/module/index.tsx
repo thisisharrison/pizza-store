@@ -7,7 +7,9 @@ import { OrderProvider } from "../context/order";
 import { Container } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
+import { testApi } from "../utils/api";
 
+/** If we have more routes, then code-splitting can help lazy-load the things that are needed by the user */
 const Home = React.lazy(() => import("./Home"));
 
 function App() {
@@ -22,6 +24,15 @@ function App() {
         },
     });
 
+    /** This is just for not breaking the demo. In production, API endpoint is stable and we don't need to check first */
+    const [apiAvailable, setApiAvailable] = React.useState(false);
+    React.useEffect(() => {
+        testApi().then((res) => {
+            setApiAvailable(true);
+        });
+    }, []);
+
+    /** Simple FallbackComponent onReset handler */
     const reloadPage = () => {
         window.location.reload();
     };
@@ -41,7 +52,7 @@ function App() {
                         >
                             <OrderProvider>
                                 <Routes>
-                                    <Route path="/" element={<Home />} />
+                                    <Route path="/" element={<Home api={apiAvailable} />} />
                                 </Routes>
                             </OrderProvider>
                         </SnackbarProvider>

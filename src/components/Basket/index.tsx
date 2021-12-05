@@ -7,17 +7,19 @@ import { useSnackbar } from "notistack";
 import { Box } from "@mui/system";
 import { Button, Divider, Link, Typography } from "@mui/material";
 
-export const Basket = () => {
+export const Basket = ({ api }: { api: boolean }) => {
     const [state, dispatch] = useOrderContext();
     const { enqueueSnackbar } = useSnackbar();
 
     const { orders } = state;
 
+    /** ObjectUtil.toArray transforms the {id: Order} structure to an array of [{Order}]*/
     const orderItems = React.useMemo(() => {
         if (orders === null) return [];
         return ObjectUtil.toArray(orders as Record<string, any>);
     }, [orders]);
 
+    /** ObjectUtil.reduceByKey sums up the prices of all orders */
     const orderTotal = React.useMemo(() => {
         if (orders === null) return 0;
         return ObjectUtil.reduceByKey(orders as Record<string, any>, "price");
@@ -28,29 +30,36 @@ export const Basket = () => {
         enqueueSnackbar("Basket cleared!", { variant: "info" });
     };
 
+    /** Only send API request if an API is available, otherwise refresh the UI and console.log to mock order submission */
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (!orders) return;
         const transaction = Object.values(orders);
-        // submit to api service
-        createOrder(transaction)
-            .then((res) => {
-                dispatch({ type: "submit" });
-                console.info("submit to API: ", res);
-                enqueueSnackbar("Your order is in the kitchen!", { variant: "success" });
-            })
-            .catch((error) => {
-                if (error.response.status === 400) {
-                    const {
-                        response: {
-                            data: { name, errors },
-                        },
-                    } = error;
-                    console.error("api error: ", name);
-                    const fields = Object.keys(errors).join(", ");
-                    enqueueSnackbar(`Your order was not successful! Check ${fields}.`, { variant: "error" });
-                }
-            });
+        if (api) {
+            // submit to api service
+            createOrder(transaction)
+                .then((res) => {
+                    dispatch({ type: "submit" });
+                    console.info("submit to API: ", res);
+                    enqueueSnackbar("The kitchen has received your order!", { variant: "success" });
+                })
+                .catch((error) => {
+                    if (error.response.status === 400) {
+                        const {
+                            response: {
+                                data: { name, errors },
+                            },
+                        } = error;
+                        console.error("api error: ", name);
+                        const fields = Object.keys(errors).join(", ");
+                        enqueueSnackbar(`Your order was not successful! Check ${fields}.`, { variant: "error" });
+                    }
+                });
+        } else {
+            dispatch({ type: "submit" });
+            console.info("mocking API submission: ", transaction);
+            enqueueSnackbar("Your order is in the kitchen!", { variant: "success" });
+        }
     };
 
     const orderActive = orderTotal > 0;
