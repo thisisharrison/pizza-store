@@ -33,7 +33,7 @@ function CustomizeDialog({ open, onClose }: CustomizeDialogProps) {
         onClose(null);
     };
 
-    // Validates toppings before submit. To see API error messages, comment out below lines leaving only `onClose(order)`
+    /** Validates toppings before submit. To see API error messages, comment out below lines leaving only `onClose(order)` */
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (order.toppings.length > 0) {

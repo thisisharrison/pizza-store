@@ -1,24 +1,11 @@
 import React from "react";
 import { OrderSummary } from "./OrderSummary";
 import { useOrderContext } from "../../context/order";
-import { useSnackbar } from "notistack";
+import { createOrder } from "../../utils/api";
 import { ObjectUtil } from "../../utils/ObjectUtil";
+import { useSnackbar } from "notistack";
 import { Box } from "@mui/system";
 import { Button, Divider, Link, Typography } from "@mui/material";
-import { createOrder } from "../../utils/api";
-
-// @ts-ignore
-window.createOrder = createOrder;
-
-interface Exception {
-    response: {
-        data: {
-            errors: {
-                [k: string]: object;
-            };
-        };
-    };
-}
 
 export const Basket = () => {
     const [state, dispatch] = useOrderContext();
@@ -52,10 +39,17 @@ export const Basket = () => {
                 console.info("submit to API: ", res);
                 enqueueSnackbar("Your order is in the kitchen!", { variant: "success" });
             })
-            .catch((error: Exception) => {
-                console.error("api error: ", error);
-                const fields = Object.keys(error.response.data.errors).join(", ");
-                enqueueSnackbar(`Your order was not successful! Check ${fields}.`, { variant: "error" });
+            .catch((error) => {
+                if (error.response.status === 400) {
+                    const {
+                        response: {
+                            data: { name, errors },
+                        },
+                    } = error;
+                    console.error("api error: ", name);
+                    const fields = Object.keys(errors).join(", ");
+                    enqueueSnackbar(`Your order was not successful! Check ${fields}.`, { variant: "error" });
+                }
             });
     };
 
