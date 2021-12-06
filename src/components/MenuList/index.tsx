@@ -1,5 +1,5 @@
 import React from "react";
-import { MenuItem } from "../MenuItem";
+import MenuItem from "../MenuItem";
 import { CustomizeModal } from "../Modal/CustomizeModal";
 import { Box } from "@mui/system";
 import type { MenuItemI } from "../../shared/types";
@@ -15,20 +15,26 @@ export const MenuList = () => {
 
     return (
         <>
-            <Box
-                sx={{
-                    flexGrow: 1,
-                    width: [1, 1, 0.7],
-                    display: "flex",
-                    flexWrap: "wrap",
-                    my: 1,
-                }}
-            >
-                {dummyMenu.map((_) => (
-                    <MenuItem key={_.id} item={_} onClick={() => setOpen(true)} />
-                ))}
-            </Box>
+            <InnerMenuList onClick={setOpen} />
             <CustomizeModal open={open} onClose={() => setOpen(false)} />
         </>
     );
 };
+
+const InnerMenuList = React.memo(({ onClick }: { onClick: React.Dispatch<React.SetStateAction<boolean>> }) => (
+    <Box
+        sx={{
+            flexGrow: 1,
+            width: [1, 1, 0.7],
+            display: "flex",
+            flexWrap: "wrap",
+            my: 1,
+        }}
+    >
+        {dummyMenu.map((_) => (
+            <MenuItem key={_.id} item={_} onClick={onClick} />
+        ))}
+    </Box>
+));
+
+InnerMenuList.displayName = "InnerMenuList";

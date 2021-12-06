@@ -56,7 +56,7 @@ interface MenuImageProps {
     onClick: () => void;
 }
 
-export const MenuImage = React.memo(({ onClick }: MenuImageProps) => {
+const MenuImage = ({ onClick }: MenuImageProps) => {
     return (
         <Box sx={{ display: "flex", flexWrap: "wrap", width: "100%" }}>
             <ImageButton focusRipple style={{ width: "100%" }} onClick={onClick} role="dialog-image">
@@ -69,4 +69,6 @@ export const MenuImage = React.memo(({ onClick }: MenuImageProps) => {
             </ImageButton>
         </Box>
     );
-});
+};
+
+export default MenuImage;

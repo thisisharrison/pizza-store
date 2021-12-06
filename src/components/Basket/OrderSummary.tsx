@@ -23,6 +23,8 @@ export const OrderSummary = React.memo(({ orders }: { orders: Order[] }) => {
     );
 });
 
+OrderSummary.displayName = "OrderSummary";
+
 const OrderItem = React.memo(({ order, onRemove }: { order: Order; onRemove: (id: number) => void }) => (
     <ListItem disablePadding>
         <ListItemIcon>
@@ -34,3 +36,5 @@ const OrderItem = React.memo(({ order, onRemove }: { order: Order; onRemove: (id
         <ListItemText sx={{ textAlign: "right", width: 0.2 }} primary={`${`$` + order.price}`} />
     </ListItem>
 ));
+
+OrderItem.displayName = "OrderItem";

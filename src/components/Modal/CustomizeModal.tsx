@@ -30,7 +30,7 @@ interface OrderStateFinal {
     size: string;
 }
 
-function CustomizeDialog({ open, onClose }: CustomizeDialogProps) {
+const CustomizeDialog = React.memo(({ open, onClose }: CustomizeDialogProps) => {
     const [order, setOrder] = React.useState<OrderState>({
         toppings: new Set(),
         size: "Pizza Size #1",
@@ -116,7 +116,9 @@ function CustomizeDialog({ open, onClose }: CustomizeDialogProps) {
             </Box>
         </Dialog>
     );
-}
+});
+
+CustomizeDialog.displayName = "CustomizeDialog";
 
 export function CustomizeModal({ open, onClose }: { open: boolean; onClose: () => void }) {
     const [state, dispatch] = useOrderContext();
@@ -124,16 +126,19 @@ export function CustomizeModal({ open, onClose }: { open: boolean; onClose: () =
 
     const { editing } = state;
 
-    const handleClose = (order: OrderStateFinal | null) => {
-        if (order) {
-            // @ts-ignore -- will always call handleClose with editing not null
-            dispatch({ type: "create", payload: { quantity: 1, ...editing, ...order }, toast: "create" });
-            enqueueSnackbar("Added an item to Basket", { variant: "success" });
-        } else {
-            dispatch({ type: "edit", payload: null });
-        }
-        onClose();
-    };
+    const handleClose = React.useCallback(
+        (order: OrderStateFinal | null) => {
+            if (order) {
+                // @ts-ignore -- will always call handleClose with editing not null
+                dispatch({ type: "create", payload: { quantity: 1, ...editing, ...order }, toast: "create" });
+                enqueueSnackbar("Added an item to Basket", { variant: "success" });
+            } else {
+                dispatch({ type: "edit", payload: null });
+            }
+            onClose();
+        },
+        [dispatch, editing, enqueueSnackbar, onClose]
+    );
 
     /** Uses key to dynamically create new Dialog. For eg. we don't want user to select Pizza #1, customize it, close it and then open Pizza #1 with the previous selection */
     /** This can be handled in Dialog by resetting state as well */
