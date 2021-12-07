@@ -9,7 +9,7 @@ import { SnackbarProvider } from "notistack";
 import { OrderProvider } from "./context/order";
 
 function render(ui: React.ReactElement, { ...options }: Record<string, any> = {}) {
-    const Wrapper = ({ children }: { children?: React.ReactNode }) => (
+    const Wrapper: React.FC = ({ children }) => (
         <OrderProvider>
             <SnackbarProvider maxSnack={3}>{children}</SnackbarProvider>
         </OrderProvider>
