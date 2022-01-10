@@ -25,11 +25,13 @@ function App() {
     });
 
     /** This is used for demo only. In real world application, API endpoints are stable and we don't need to check first */
-    const [apiAvailable, setApiAvailable] = React.useState(false);
+    const apiRef = React.useRef(false);
+
     React.useEffect(() => {
         testApi()
             .then((res) => {
-                setApiAvailable(true);
+                apiRef.current = true;
+                console.info("Back end server running. API calls will be real.");
             })
             .catch((err) => console.info("Back end server not running. Please start Dev Server or check Production Server. Will mock API calls in Console"));
     }, []);
@@ -54,7 +56,7 @@ function App() {
                         >
                             <OrderProvider>
                                 <Routes>
-                                    <Route path="/" element={<Home api={apiAvailable} />} />
+                                    <Route path="/" element={<Home api={apiRef.current} />} />
                                 </Routes>
                             </OrderProvider>
                         </SnackbarProvider>
